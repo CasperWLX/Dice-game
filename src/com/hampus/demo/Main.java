@@ -26,6 +26,7 @@ public class Main
         int playAgain;
         boolean gameIsRunning = true;
         String playerName;
+        
         Input userInput = new Input();
         ArrayList<Player> listOfPlayers = new ArrayList<>();
 

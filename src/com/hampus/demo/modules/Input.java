@@ -15,16 +15,17 @@ public class Input
 
     /**
      * Metod som tar emot inmatning från användaren men endast returnerar ifall det är ett heltal
+     *
      * @return - heltal
      */
     public int getInt()
     {
         //Startar while loop
         int num = Integer.MAX_VALUE;
-        while (num == Integer.MAX_VALUE)
+        while(num == Integer.MAX_VALUE)
         {
             //Kontrollerar ifall inmatning är en Int
-            if (input.hasNextInt())
+            if(input.hasNextInt())
             {
                 num = input.nextInt();
             }
@@ -41,6 +42,7 @@ public class Input
 
     /**
      * Metod som endast returnerar en String med alfabetiska bokstäver mellan A-Ö
+     *
      * @return - String med spelarens namn
      */
     public String getStringInput()

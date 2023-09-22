@@ -1,4 +1,5 @@
 package com.hampus.demo.modules;
+
 /**
  * Klass som hanterar spelare
  *
@@ -11,6 +12,7 @@ public class Player
 
     /**
      * Konstruktor för klassen
+     *
      * @param name - spelarens namn
      */
     public Player(String name)
@@ -20,6 +22,7 @@ public class Player
 
     /**
      * ToString metod
+     *
      * @return - Player + namn
      */
     public String toString()
@@ -29,6 +32,7 @@ public class Player
 
     /**
      * Metod som ändrar spelarens poäng
+     *
      * @param currentScore - int med total poäng under denna runda
      */
     public void setCurrentScore(int currentScore)
@@ -38,6 +42,7 @@ public class Player
 
     /**
      * Metod som hämtar spelarens namn
+     *
      * @return - Spelarens namn
      */
     public String getName()
@@ -47,6 +52,7 @@ public class Player
 
     /**
      * Metod som hämtar en spelare totala poäng under denna runda
+     *
      * @return - int med spelarens poäng
      */
     public int getCurrentScore()

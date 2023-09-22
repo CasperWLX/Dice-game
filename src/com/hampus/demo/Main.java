@@ -35,7 +35,7 @@ public class Main
         //Lägger till spelarantal och namn
         System.out.println("Hello and welcome to dice game\nPlease enter how many players are playing (2-10 players supported)");
         noOfPlayers = currentGame.amountOfPlayers(userInput);
-        currentGame.addPlayers(noOfPlayers, listOfPlayers,userInput);
+        currentGame.addPlayers(noOfPlayers, listOfPlayers, userInput);
 
         //Lägger till antal tärningar som ska användas under spelet
         System.out.println("Please enter how many dices you want to play with (1-5)");

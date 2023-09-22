@@ -6,6 +6,7 @@ public class Game
 {
     /**
      * Metod som kontrollerar att rätt antal spelare väljs
+     *
      * @param scanner - Scanner för att göra inmatning
      * @return - heltal mellan 2-10
      */
@@ -27,7 +28,29 @@ public class Game
     }
 
     /**
+     * Metod som lägger till spelare till nuvarande spel
+     *
+     * @param noOfPlayers   - antal spelare som ska läggas till
+     * @param listOfPlayers - lista som håller koll på alla spelare
+     * @param userInput     - Scanner för inmatning av spelarnamn
+     */
+    public void addPlayers(int noOfPlayers, ArrayList<Player> listOfPlayers, Input userInput)
+    {
+        int currentPlayerNumber = 0;
+        String playerName;
+        for(int i = 0; i < noOfPlayers; i++)
+        {
+            currentPlayerNumber++;
+            System.out.println("Please enter the name of player number: " + currentPlayerNumber);
+            playerName = userInput.getStringInput();
+            Player addPlayer = new Player(playerName);
+            listOfPlayers.add(addPlayer);
+        }
+    }
+
+    /**
      * Metod som kontrollerar så att rätt antal tärningar väljs
+     *
      * @param scanner - Scanner för att göra inmatning
      * @return - heltal mellan 1-5
      */
@@ -47,47 +70,27 @@ public class Game
             }
         }
     }
+
     /**
-     * Metod som tar emot endast 1 eller 2 för att starta ny runda
-     * @return - Integer med talet 1 eller 2
+     * Metod som sparar spelarens poäng
+     *
+     * @param player   - Objekt med spelarinfo
+     * @param noOfDice - Antal tärningar som ska rullas
      */
-    public int playAgain(Input scanner)
+    public void saveScore(Player player, int noOfDice)
     {
-        int tempNum = 0;
-        while(tempNum == 0)
-        {
-            //Switch så att det går att använda userInput.getIntDice metoden utan behöva att modifiera den
-            switch(scanner.getInt())
-            {
-                case 1 -> tempNum = 1;
-                case 2 -> tempNum = 2;
-                default -> System.out.println("Please only enter 1 or 2.");
-            }
-        }
-        return tempNum;
+        System.out.println("----------------------------------");
+        System.out.printf("Rolling %d dice for player %s\n", noOfDice, player.getName());
+        player.setCurrentScore(rollDice(noOfDice));         //Rullar tärningar i annan metod och sparar poängen här.
+        System.out.printf("Total score for %s is : %d\n", player.getName(), player.getCurrentScore());
+
+        //Saktar ner flödet i konsolen
+        waitTwoSeconds();
     }
 
     /**
-     * Metod som lägger till spelare till nuvarande spel
-     * @param noOfPlayers - antal spelare som ska läggas till
-     * @param listOfPlayers - lista som håller koll på alla spelare
-     * @param userInput - Scanner för inmatning av spelarnamn
-     */
-    public void addPlayers(int noOfPlayers, ArrayList<Player> listOfPlayers, Input userInput)
-    {
-        int currentPlayerNumber = 0;
-        String playerName;
-        for(int i = 0; i < noOfPlayers; i++)
-        {
-            currentPlayerNumber++;
-            System.out.println("Please enter the name of player number: " + currentPlayerNumber);
-            playerName = userInput.getStringInput();
-            Player addPlayer = new Player(playerName);
-            listOfPlayers.add(addPlayer);
-        }
-    }
-    /**
-     * Metod som kastar x antal tärningar och summerar poängen
+     * Metod som rullar x antal tärningar och summerar poängen
+     *
      * @param noOfDice - Antal tärningar
      * @return - Total poäng
      */
@@ -107,20 +110,25 @@ public class Game
 
         return score;
     }
-    /**
-     * Metod som sparar spelarens poäng
-     * @param player   - Objekt med spelarinfo
-     * @param noOfDice - Antal tärningar som ska rullas
-     */
-    public void saveScore(Player player, int noOfDice)
-    {
-        System.out.println("----------------------------------");
-        System.out.printf("Rolling %d dice for player %s\n", noOfDice, player.getName());
-        player.setCurrentScore(rollDice(noOfDice));         //Rullar tärningar i annan metod och sparar poängen här.
-        System.out.printf("Total score for %s is : %d\n", player.getName(), player.getCurrentScore());
 
-        //Saktar ner flödet i konsolen
-        waitTwoSeconds();
+    /**
+     * Metod som tar emot endast 1 eller 2 för att starta ny runda
+     *
+     * @return - Integer med talet 1 eller 2
+     */
+    public int playAgain(Input scanner)
+    {
+        int tempNum = 0;
+        while(tempNum == 0)
+        {
+            switch(scanner.getInt())
+            {
+                case 1 -> tempNum = 1;
+                case 2 -> tempNum = 2;
+                default -> System.out.println("Please only enter 1 or 2.");
+            }
+        }
+        return tempNum;
     }
 
     /**

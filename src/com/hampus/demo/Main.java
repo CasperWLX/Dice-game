@@ -61,10 +61,10 @@ public class Main
             System.out.println(divider);
 
             //Lägger till vinnare i en egen lista
-            addWinners(listOfPlayers, winningPlayers, currentMax);
+            addWinners(listOfPlayers,winningPlayers, currentMax);
 
             //kontrollerar ifall det finns fler än 1 vinnare och presenterar resultat
-            printWinners(winningPlayers, currentMax);
+            printWinners(winningPlayers);
             System.out.println(divider);
 
             //Spela igen alternativ
@@ -90,10 +90,7 @@ public class Main
      */
     public static void printPlayers(ArrayList<Player> listOfPlayers)
     {
-        for(Player player : listOfPlayers)
-        {
-            System.out.println(player);
-        }
+        listOfPlayers.forEach(System.out::println);
     }
 
     /**
@@ -142,20 +139,19 @@ public class Main
      * Metod som skriver ut vinnaren/vinnarna
      *
      * @param winningPlayers - lista med vinnare
-     * @param currentMax     - nuvarande högsta poäng
      */
-    public static void printWinners(ArrayList<Player> winningPlayers, int currentMax)
+    public static void printWinners(ArrayList<Player> winningPlayers)
     {
         if(winningPlayers.size() > 1)
         {
             for(Player players : winningPlayers)
             {
-                System.out.printf("The winners are %s with a score of %d\n", players.getName(), currentMax);
+                System.out.printf("The winners are %s with a score of %d\n", players.getName(), players.getCurrentScore());
             }
         }
         else
         {
-            System.out.printf("The winner is %s with a score of %d\n", winningPlayers.get(0).getName(), currentMax);
+            System.out.printf("The winner is %s with a score of %d\n", winningPlayers.get(0).getName(), winningPlayers.get(0).getCurrentScore());
         }
     }
 }

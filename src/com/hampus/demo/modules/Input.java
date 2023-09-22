@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
  */
 public class Input
 {
+    //Skapar nytt scanner objekt för inmatning
     Scanner input = new Scanner(System.in);
 
     /**

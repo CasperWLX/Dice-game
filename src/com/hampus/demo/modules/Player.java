@@ -7,6 +7,7 @@ package com.hampus.demo.modules;
  */
 public class Player
 {
+    //Anger konstanter och variabler
     private final String NAME;
     private int currentScore;
 

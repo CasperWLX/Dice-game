@@ -1,6 +1,7 @@
 package com.hampus.demo;
 
 import java.util.ArrayList;
+
 import com.hampus.demo.modules.Input;
 import com.hampus.demo.modules.Player;
 
@@ -20,21 +21,21 @@ public class Main
     public static void main(String[] args)
     {
         //Anger variabler, objekt och listor
-        int amountOfPlayers;
+        int noOfPlayers;
         int currentPlayerNumber = 0;
         int noOfDice;
         int playAgain;
         boolean gameIsRunning = true;
         String playerName;
-        
+
         Input userInput = new Input();
         ArrayList<Player> listOfPlayers = new ArrayList<>();
 
         System.out.println("Hello and welcome to dice game\nPlease enter how many players are playing (2-10 players supported)");
-        amountOfPlayers = userInput.getIntPlayers();
+        noOfPlayers = amountOfPlayers(userInput);
 
         //Lägger till alla spelare och deras namn
-        for(int i = 0; i < amountOfPlayers; i++)
+        for(int i = 0; i < noOfPlayers; i++)
         {
             currentPlayerNumber++;
             System.out.println("Please enter the name of player number: " + currentPlayerNumber);
@@ -45,13 +46,15 @@ public class Main
 
         //Lägger till antal tärningar som ska användas under spelet
         System.out.println("Please enter how many dices you want to play with (1-5)");
-        noOfDice = userInput.getIntDice();
+        noOfDice = noOfDice(userInput);
 
         //Skriver ut ordningen och spelares namn
         for(Player player : listOfPlayers)
         {
             System.out.println(player);
         }
+        //Metod som väntar 2 sekunder innan den printar
+        waitTwoSeconds();
 
         //Startar spelet
         while(gameIsRunning)
@@ -96,7 +99,7 @@ public class Main
             //Spela igen alternativ
             System.out.println("----------------------------------");
             System.out.println("Play another round?\nPress 1 for: YES\nPress 2 for: NO");
-            playAgain = playAgain();
+            playAgain = playAgain(userInput);
             if(playAgain == 1)
             {
                 System.out.println("Starting another round");
@@ -108,6 +111,7 @@ public class Main
             }
         }
     }
+
     /**
      * Metod som sparar spelarens poäng
      *
@@ -122,15 +126,9 @@ public class Main
         System.out.printf("Total score for %s is : %d\n", player.getName(), player.getCurrentScore());
 
         //Saktar ner flödet i konsolen
-        try
-        {
-            Thread.sleep(2000);
-        }
-        catch(InterruptedException e)
-        {
-            Thread.currentThread().interrupt();
-        }
+        waitTwoSeconds();
     }
+
     /**
      * Metod som kastar x antal tärningar och summerar poängen
      *
@@ -156,27 +154,68 @@ public class Main
 
     /**
      * Metod som tar emot endast 1 eller 2 för att starta ny runda
+     *
      * @return - Integer med talet 1 eller 2
      */
-    public static int playAgain()
+    public static int playAgain(Input scanner)
     {
-        Input userInput = new Input();
-        while(true)
+        int tempNum = 0;
+        while(tempNum == 0)
         {
             //Switch så att det går att använda userInput.getIntDice metoden utan behöva att modifiera den
-            switch(userInput.getIntDice())
+            switch(scanner.getInt())
             {
-                case 1 ->
-                {
-                    return 1;
-                }
-                case 2 ->
-                {
-                    return 2;
-                }
-                default -> System.out.println("Please enter a correct value");
+                case 1 -> tempNum = 1;
+                case 2 -> tempNum = 2;
+                default -> System.out.println("Please only enter 1 or 2.");
+            }
+        }
+        return tempNum;
+    }
+
+    public static int amountOfPlayers(Input scanner)
+    {
+        int tempNum;
+        while(true)
+        {
+            tempNum = scanner.getInt();
+            if(tempNum < 2 || tempNum > 10)
+            {
+                System.out.println("Please enter a valid number");
+            }
+            else
+            {
+                return tempNum;
             }
         }
     }
 
+    public static int noOfDice(Input scanner)
+    {
+        int tempNum;
+        while(true)
+        {
+            tempNum = scanner.getInt();
+            if(tempNum < 1 || tempNum > 5)
+            {
+                System.out.println("Please enter a valid number");
+            }
+            else
+            {
+                return tempNum;
+            }
+        }
+    }
+
+    public static void waitTwoSeconds()
+    {
+        try
+        {
+            Thread.sleep(2000);
+        }
+        catch(InterruptedException e)
+        {
+            Thread.currentThread().interrupt();
+        }
+    }
 }

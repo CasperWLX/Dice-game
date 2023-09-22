@@ -14,10 +14,10 @@ public class Input
     Scanner input = new Scanner(System.in);
 
     /**
-     * Metod som tar emot inmatning från användaren men endast returnerar ifall det är ett heltal 2-10
-     * @return - heltal mellan 2-10
+     * Metod som tar emot inmatning från användaren men endast returnerar ifall det är ett heltal
+     * @return - heltal
      */
-    public int getIntPlayers()
+    public int getInt()
     {
         //Startar while loop
         int num = Integer.MAX_VALUE;
@@ -27,13 +27,6 @@ public class Input
             if (input.hasNextInt())
             {
                 num = input.nextInt();
-
-                //Kontrollerar så att Int är inom vår range av tal
-                if(num < 2 || num > 10)
-                {
-                    System.out.println("Enter a valid number");
-                    num = Integer.MAX_VALUE;
-                }
             }
             //Felmeddelande ifall det inte är en Int
             else
@@ -41,33 +34,6 @@ public class Input
                 System.out.println("Enter a valid number");
             }
             //Rensar input buffer
-            input.nextLine();
-        }
-        return num;
-    }
-
-    /**
-     * Metod som fungerar som ovanstående men som endast tar emot nummer mellan 1-5
-     * @return - heltal mellan 1-5
-     */
-    public int getIntDice()
-    {
-        int num = Integer.MAX_VALUE;
-        while (num == Integer.MAX_VALUE)
-        {
-            if (input.hasNextInt())
-            {
-                num = input.nextInt();
-                if(num < 1 || num > 5)
-                {
-                    System.out.println("Enter a valid number");
-                    num = Integer.MAX_VALUE;
-                }
-            }
-            else
-            {
-                System.out.println("Enter a valid number");
-            }
             input.nextLine();
         }
         return num;
@@ -95,11 +61,7 @@ public class Input
             boolean containsNumbers = numberMatcher.find();
 
             //Returnerar namn ifall inga siffror eller bokstäver finns med
-            if(containsSymbols)
-            {
-                System.out.println("Please enter a valid name");
-            }
-            else if(containsNumbers)
+            if(containsSymbols || containsNumbers)
             {
                 System.out.println("Please enter a valid name");
             }

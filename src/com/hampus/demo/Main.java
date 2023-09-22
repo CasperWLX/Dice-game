@@ -2,6 +2,7 @@ package com.hampus.demo;
 
 import java.util.ArrayList;
 
+import com.hampus.demo.modules.Game;
 import com.hampus.demo.modules.Input;
 import com.hampus.demo.modules.Player;
 
@@ -20,41 +21,34 @@ public class Main
 {
     public static void main(String[] args)
     {
-        //Anger variabler, objekt och listor
+        //Anger variabler
         int noOfPlayers;
-        int currentPlayerNumber = 0;
         int noOfDice;
         int playAgain;
         boolean gameIsRunning = true;
-        String playerName;
 
+        //Skapar objekt och listor
         Input userInput = new Input();
+        Game currentGame = new Game();
         ArrayList<Player> listOfPlayers = new ArrayList<>();
 
+        //Lägger till spelarantal och namn
         System.out.println("Hello and welcome to dice game\nPlease enter how many players are playing (2-10 players supported)");
-        noOfPlayers = amountOfPlayers(userInput);
-
-        //Lägger till alla spelare och deras namn
-        for(int i = 0; i < noOfPlayers; i++)
-        {
-            currentPlayerNumber++;
-            System.out.println("Please enter the name of player number: " + currentPlayerNumber);
-            playerName = userInput.getStringInput();
-            Player addPlayer = new Player(playerName);
-            listOfPlayers.add(addPlayer);
-        }
+        noOfPlayers = currentGame.amountOfPlayers(userInput);
+        currentGame.addPlayers(noOfPlayers, listOfPlayers,userInput);
 
         //Lägger till antal tärningar som ska användas under spelet
         System.out.println("Please enter how many dices you want to play with (1-5)");
-        noOfDice = noOfDice(userInput);
+        noOfDice = currentGame.noOfDice(userInput);
 
         //Skriver ut ordningen och spelares namn
         for(Player player : listOfPlayers)
         {
             System.out.println(player);
         }
+
         //Metod som väntar 2 sekunder innan den printar
-        waitTwoSeconds();
+        currentGame.waitTwoSeconds();
 
         //Startar spelet
         while(gameIsRunning)
@@ -66,7 +60,7 @@ public class Main
             //loopar igenom alla spelare för att spara deras poäng samt högsta poäng
             for(Player player : listOfPlayers)
             {
-                saveScore(player, noOfDice);
+                currentGame.saveScore(player, noOfDice);
 
                 if(player.getCurrentScore() > currentMax)
                 {
@@ -99,7 +93,7 @@ public class Main
             //Spela igen alternativ
             System.out.println("----------------------------------");
             System.out.println("Play another round?\nPress 1 for: YES\nPress 2 for: NO");
-            playAgain = playAgain(userInput);
+            playAgain = currentGame.playAgain(userInput);
             if(playAgain == 1)
             {
                 System.out.println("Starting another round");
@@ -109,113 +103,6 @@ public class Main
                 System.out.println("Thanks for playing");
                 gameIsRunning = false;      //Avslutar spel
             }
-        }
-    }
-
-    /**
-     * Metod som sparar spelarens poäng
-     *
-     * @param player   - Objekt med spelarinfo
-     * @param noOfDice - Antal tärningar som ska rullas
-     */
-    public static void saveScore(Player player, int noOfDice)
-    {
-        System.out.println("----------------------------------");
-        System.out.printf("Rolling %d dice for player %s\n", noOfDice, player.getName());
-        player.setCurrentScore(rollDice(noOfDice));         //Rullar tärningar i annan metod och sparar poängen här.
-        System.out.printf("Total score for %s is : %d\n", player.getName(), player.getCurrentScore());
-
-        //Saktar ner flödet i konsolen
-        waitTwoSeconds();
-    }
-
-    /**
-     * Metod som kastar x antal tärningar och summerar poängen
-     *
-     * @param noOfDice - Antal tärningar
-     * @return - Total poäng
-     */
-    public static int rollDice(int noOfDice)
-    {
-        //Variabler
-        int score = 0;
-        int diceThrow;
-
-        //Rullar x antal tärningar
-        for(int i = 1; i <= noOfDice; i++)
-        {
-            diceThrow = (int) (Math.random() * 6 + 1);
-            score = score + diceThrow;
-            System.out.printf("Dice %d is a %d\n", i, diceThrow);
-        }
-
-        return score;
-    }
-
-    /**
-     * Metod som tar emot endast 1 eller 2 för att starta ny runda
-     *
-     * @return - Integer med talet 1 eller 2
-     */
-    public static int playAgain(Input scanner)
-    {
-        int tempNum = 0;
-        while(tempNum == 0)
-        {
-            //Switch så att det går att använda userInput.getIntDice metoden utan behöva att modifiera den
-            switch(scanner.getInt())
-            {
-                case 1 -> tempNum = 1;
-                case 2 -> tempNum = 2;
-                default -> System.out.println("Please only enter 1 or 2.");
-            }
-        }
-        return tempNum;
-    }
-
-    public static int amountOfPlayers(Input scanner)
-    {
-        int tempNum;
-        while(true)
-        {
-            tempNum = scanner.getInt();
-            if(tempNum < 2 || tempNum > 10)
-            {
-                System.out.println("Please enter a valid number");
-            }
-            else
-            {
-                return tempNum;
-            }
-        }
-    }
-
-    public static int noOfDice(Input scanner)
-    {
-        int tempNum;
-        while(true)
-        {
-            tempNum = scanner.getInt();
-            if(tempNum < 1 || tempNum > 5)
-            {
-                System.out.println("Please enter a valid number");
-            }
-            else
-            {
-                return tempNum;
-            }
-        }
-    }
-
-    public static void waitTwoSeconds()
-    {
-        try
-        {
-            Thread.sleep(2000);
-        }
-        catch(InterruptedException e)
-        {
-            Thread.currentThread().interrupt();
         }
     }
 }

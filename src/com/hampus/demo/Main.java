@@ -61,7 +61,7 @@ public class Main
             System.out.println(divider);
 
             //Lägger till vinnare i en egen lista
-            addWinners(listOfPlayers,winningPlayers, currentMax);
+            addWinners(listOfPlayers, winningPlayers, currentMax);
 
             //kontrollerar ifall det finns fler än 1 vinnare och presenterar resultat
             printWinners(winningPlayers);

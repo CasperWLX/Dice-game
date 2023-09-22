@@ -5,18 +5,20 @@ import java.util.ArrayList;
 public class Game
 {
     /**
-     * Metod som kontrollerar att rätt antal spelare väljs
+     * Metod som kontrollerar att rätt heltal valts av användare
      *
-     * @param scanner - Scanner för att göra inmatning
-     * @return - heltal mellan 2-10
+     * @param scanner - Scanner för inmatning
+     * @param min     - lägsta godtagna tal
+     * @param max     - högsta godtagna tal
+     * @return - heltal mellan min och max
      */
-    public int amountOfPlayers(Input scanner)
+    public int specificInt(Input scanner, int min, int max)
     {
         int tempNum;
         while(true)
         {
             tempNum = scanner.getInt();
-            if(tempNum < 2 || tempNum > 10)
+            if(tempNum < min || tempNum > max)
             {
                 System.out.println("Please enter a valid number");
             }
@@ -45,29 +47,6 @@ public class Game
             playerName = userInput.getStringInput();
             Player addPlayer = new Player(playerName);
             listOfPlayers.add(addPlayer);
-        }
-    }
-
-    /**
-     * Metod som kontrollerar så att rätt antal tärningar väljs
-     *
-     * @param scanner - Scanner för att göra inmatning
-     * @return - heltal mellan 1-5
-     */
-    public int noOfDice(Input scanner)
-    {
-        int tempNum;
-        while(true)
-        {
-            tempNum = scanner.getInt();
-            if(tempNum < 1 || tempNum > 5)
-            {
-                System.out.println("Please enter a valid number");
-            }
-            else
-            {
-                return tempNum;
-            }
         }
     }
 
@@ -109,26 +88,6 @@ public class Game
         }
 
         return score;
-    }
-
-    /**
-     * Metod som tar emot endast 1 eller 2 för att starta ny runda
-     *
-     * @return - Integer med talet 1 eller 2
-     */
-    public int playAgain(Input scanner)
-    {
-        int tempNum = 0;
-        while(tempNum == 0)
-        {
-            switch(scanner.getInt())
-            {
-                case 1 -> tempNum = 1;
-                case 2 -> tempNum = 2;
-                default -> System.out.println("Please only enter 1 or 2.");
-            }
-        }
-        return tempNum;
     }
 
     /**

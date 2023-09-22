@@ -34,12 +34,12 @@ public class Main
 
         //Lägger till spelarantal och namn
         System.out.println("Hello and welcome to dice game\nPlease enter how many players are playing (2-10 players supported)");
-        noOfPlayers = currentGame.amountOfPlayers(userInput);
+        noOfPlayers = currentGame.specificInt(userInput, 2, 10);
         currentGame.addPlayers(noOfPlayers, listOfPlayers, userInput);
 
         //Lägger till antal tärningar som ska användas under spelet
         System.out.println("Please enter how many dices you want to play with (1-5)");
-        noOfDice = currentGame.noOfDice(userInput);
+        noOfDice = currentGame.specificInt(userInput, 1, 5);
 
         //Skriver ut ordningen och spelares namn
         for(Player player : listOfPlayers)
@@ -93,7 +93,7 @@ public class Main
             //Spela igen alternativ
             System.out.println("----------------------------------");
             System.out.println("Play another round?\nPress 1 for: YES\nPress 2 for: NO");
-            playAgain = currentGame.playAgain(userInput);
+            playAgain = currentGame.specificInt(userInput, 1, 2);
             if(playAgain == 1)
             {
                 System.out.println("Starting another round");

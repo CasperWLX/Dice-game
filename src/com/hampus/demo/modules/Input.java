@@ -21,24 +21,24 @@ public class Input
      */
     public int getInt()
     {
-        //Startar while loop
-        int num = Integer.MAX_VALUE;
-        while(num == Integer.MAX_VALUE)
+        while(true)
         {
-            //Kontrollerar ifall inmatning är en Int
-            if(input.hasNextInt())
+            int number;
+            String choice = input.nextLine();
+            if(choice.isEmpty())
             {
-                num = input.nextInt();
+                System.out.println("Please enter a valid number");
             }
-            //Felmeddelande ifall det inte är en Int
-            else
+            else try
             {
-                System.out.println("Enter a valid number");
+                number = Integer.parseInt(choice);
+                return number;
             }
-            //Rensar input buffer
-            input.nextLine();
+            catch(NumberFormatException e)
+            {
+                System.out.println("Please enter a valid number");
+            }
         }
-        return num;
     }
 
     /**
@@ -48,14 +48,15 @@ public class Input
      */
     public String getStringInput()
     {
+        //Sätter upp regler för vad stringen får innehålla
+        Pattern special = Pattern.compile("[^a-ö0-9]", Pattern.CASE_INSENSITIVE);
+        Pattern number = Pattern.compile("[0-9]", Pattern.CASE_INSENSITIVE);
+
         while(true)
         {
             //Sparar input i en String
             String userName = input.nextLine();
 
-            //Sätter upp regler för vad stringen får innehålla
-            Pattern special = Pattern.compile("[^a-ö0-9]", Pattern.CASE_INSENSITIVE);
-            Pattern number = Pattern.compile("[0-9]", Pattern.CASE_INSENSITIVE);
             Matcher matcher = special.matcher(userName);
             Matcher numberMatcher = number.matcher(userName);
 

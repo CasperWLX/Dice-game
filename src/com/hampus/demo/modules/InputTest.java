@@ -8,9 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class InputTest
 {
-
-
-
     @Test
     void getInt()
     {

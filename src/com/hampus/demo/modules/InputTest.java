@@ -2,31 +2,46 @@ package com.hampus.demo.modules;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class InputTest
 {
+    Input input = new Input();
+
     @Test
-    void getInt()
+    void isInputEmpty()
     {
-        String fakeInput = "1\n";
-
-        System.setIn(new ByteArrayInputStream(fakeInput.getBytes()));
-
-        Input user = new Input();
-        int result = user.getInt();
-
-        assertEquals(10,result);
-        assertEquals(1,result);
-        assertEquals(1,result);
-
+        int result = input.isInputEmpty("");
+        assertEquals(0,result);
     }
 
     @Test
-    void getStringInput()
+    void isNumberAnInt()
     {
+        int result = input.isInputEmpty("aaabbbccc");
+        assertEquals(0, result);
+    }
 
+    @Test
+    void isNumberPositive()
+    {
+        int result = input.isInputEmpty("-123");
+        assertEquals(0,result);
+    }
+
+    @Test
+    void hasSpecialCharacterOrNumber()
+    {
+        String result = input.hasSpecialCharacterOrNumber("lma0");
+        assertEquals(" ",result);
+
+        result = input.hasSpecialCharacterOrNumber("lol");
+        assertEquals("lol",result);
+
+        result = input.hasSpecialCharacterOrNumber("1234");
+        assertEquals(" ",result);
+
+        result = input.hasSpecialCharacterOrNumber("Hampus");
+        assertEquals("Hampus",result);
     }
 }

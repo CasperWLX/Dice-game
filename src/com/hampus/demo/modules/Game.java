@@ -46,6 +46,7 @@ public class Game
             System.out.println("Please enter the name of player number: " + currentPlayerNumber);
             playerName = userInput.getStringInput();
             Player addPlayer = new Player(playerName);
+            addPlayer.setPlayerNumber(i + 1);
             listOfPlayers.add(addPlayer);
         }
     }
@@ -64,7 +65,7 @@ public class Game
         System.out.printf("Total score for %s is : %d\n", player.getName(), player.getCurrentScore());
 
         //Saktar ner flödet i konsolen
-        waitTwoSeconds();
+        waitTwoSeconds(noOfDice);
     }
 
     /**
@@ -93,11 +94,12 @@ public class Game
     /**
      * Metod som väntar i 2 sekunder innan den skickar ut något i konsolen
      */
-    public void waitTwoSeconds()
+    public void waitTwoSeconds(int noOfDice)
     {
+        int secondsToWait = 1000 * noOfDice;
         try
         {
-            Thread.sleep(2000);
+            Thread.sleep(secondsToWait);
         }
         catch(InterruptedException e)
         {

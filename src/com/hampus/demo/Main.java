@@ -45,7 +45,7 @@ public class Main
         printPlayers(listOfPlayers);
 
         //Metod som väntar 2 sekunder innan den printar
-        currentGame.waitTwoSeconds();
+        currentGame.waitTwoSeconds(noOfPlayers);
 
         //Startar spelet
         do
@@ -90,7 +90,10 @@ public class Main
      */
     public static void printPlayers(ArrayList<Player> listOfPlayers)
     {
-        listOfPlayers.forEach(System.out::println);
+        for(Player listOfPlayer : listOfPlayers)
+        {
+            System.out.println(listOfPlayer);
+        }
     }
 
     /**

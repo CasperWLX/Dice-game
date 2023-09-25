@@ -10,6 +10,7 @@ public class Player
     //Anger konstanter och variabler
     private final String NAME;
     private int currentScore;
+    private int playerNumber;
 
     /**
      * Konstruktor för klassen
@@ -28,7 +29,7 @@ public class Player
      */
     public String toString()
     {
-        return "player: " + NAME;
+        return "player " + playerNumber + ": " + NAME;
     }
 
     /**
@@ -59,6 +60,11 @@ public class Player
     public int getCurrentScore()
     {
         return this.currentScore;
+    }
+
+    public void setPlayerNumber(int playerNumber)
+    {
+        this.playerNumber = playerNumber;
     }
 }
 

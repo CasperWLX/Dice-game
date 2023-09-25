@@ -21,24 +21,55 @@ public class Input
      */
     public int getInt()
     {
-        while(true)
+        //Anger variabler
+        boolean loopIsRunning = true;
+        int number = 0;
+
+        //Startar loop för kontroll
+        while(loopIsRunning)
         {
-            int number;
             String choice = input.nextLine();
-            if(choice.isEmpty())
+            number = isInputEmpty(choice);
+            if(number != 0)
             {
-                System.out.println("Please enter a valid number");
-            }
-            else try
-            {
-                number = Integer.parseInt(choice);
-                return number;
-            }
-            catch(NumberFormatException e)
-            {
-                System.out.println("Please enter a valid number");
+                loopIsRunning = false;
             }
         }
+        return number;
+    }
+
+    public int isInputEmpty(String number)
+    {
+        if(number.isEmpty())
+        {
+            System.out.println("Nothing entered, try again");
+            return 0;
+        }
+        return isNumberAnInt(number);
+    }
+
+    public int isNumberAnInt(String number)
+    {
+        try
+        {
+            return isNumberPositive(number);
+        }
+        catch(NumberFormatException e)
+        {
+            System.out.println("Please only enter numbers");
+            return 0;
+        }
+    }
+
+    public int isNumberPositive(String number)
+    {
+        int result = Integer.parseInt(number);
+        if(result < 1)
+        {
+            System.out.println("Please enter a positive number");
+            return 0;
+        }
+        return result;
     }
 
     /**
@@ -48,24 +79,14 @@ public class Input
      */
     public String getStringInput()
     {
-        //Sätter upp regler för vad stringen får innehålla
-        Pattern special = Pattern.compile("[^a-ö0-9]", Pattern.CASE_INSENSITIVE);
-        Pattern number = Pattern.compile("[0-9]", Pattern.CASE_INSENSITIVE);
-
         while(true)
         {
             //Sparar input i en String
             String userName = input.nextLine();
 
-            Matcher matcher = special.matcher(userName);
-            Matcher numberMatcher = number.matcher(userName);
+            userName = hasSpecialCharacterOrNumber(userName);
 
-            //Kontrollerar ifall det finns siffror eller specialtecken i strängen
-            boolean containsSymbols = matcher.find();
-            boolean containsNumbers = numberMatcher.find();
-
-            //Returnerar namn ifall inga siffror eller bokstäver finns med
-            if(containsSymbols || containsNumbers)
+            if(userName.equals(" "))
             {
                 System.out.println("Please enter a valid name");
             }
@@ -73,6 +94,32 @@ public class Input
             {
                 return userName;
             }
+        }
+    }
+
+    public String hasSpecialCharacterOrNumber(String userName)
+    {
+        //Sätter upp regler för vad stringen får innehålla
+        Pattern special = Pattern.compile("[^a-ö0-9]", Pattern.CASE_INSENSITIVE);
+        Pattern number = Pattern.compile("[0-9]", Pattern.CASE_INSENSITIVE);
+
+        Matcher matcher = special.matcher(userName);
+        Matcher numberMatcher = number.matcher(userName);
+
+        //Kontrollerar ifall det finns siffror eller specialtecken i strängen
+        boolean containsSymbols = matcher.find();
+        boolean containsNumbers = numberMatcher.find();
+
+        //Returnerar namn ifall inga siffror eller bokstäver finns med
+        if(containsSymbols || containsNumbers)
+        {
+            System.out.println("The name can't contain special characters or numbers");
+            return " ";
+        }
+        else
+        {
+            System.out.println("Player " + userName + " has been added");
+            return userName;
         }
     }
 }

@@ -38,6 +38,13 @@ public class Input
         return number;
     }
 
+    /**
+     * Metod som kontrollerar ifall det strängen är tom
+     *
+     * @param number - sträng med inmatning från användaren
+     * @return - 0 eller inmatat nummer
+     */
+
     public int isInputEmpty(String number)
     {
         if(number.isEmpty())
@@ -48,6 +55,12 @@ public class Input
         return isNumberAnInt(number);
     }
 
+    /**
+     * Metod som kontrollerar ifall det strängen endast innehåller tal
+     *
+     * @param number - sträng med inmatning från användaren
+     * @return - 0 eller inmatat nummer
+     */
     public int isNumberAnInt(String number)
     {
         try
@@ -61,6 +74,12 @@ public class Input
         }
     }
 
+    /**
+     * Metod som kontrollerar att inmatade talet är positivt
+     *
+     * @param number - sträng med inmatning från användaren
+     * @return - 0 eller inmatat nummer
+     */
     public int isNumberPositive(String number)
     {
         int result = Integer.parseInt(number);
@@ -97,6 +116,12 @@ public class Input
         }
     }
 
+    /**
+     * Metod som kontrollerar om strängen innehåller siffror eller special karaktärer
+     *
+     * @param userName - sträng med inmatat namn från användaren
+     * @return - " " eller inmatat namn
+     */
     public String hasSpecialCharacterOrNumber(String userName)
     {
         //Sätter upp regler för vad stringen får innehålla

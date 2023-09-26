@@ -34,7 +34,7 @@ class InputTest
         int result = input.isNumberPositive("-123");
         assertEquals(0,result);
 
-        result = input.isNumberPositive("-1");
+        result = input.isNumberPositive("0");
         assertEquals(0,result);
 
         result = input.isNumberPositive(String.valueOf(Integer.MIN_VALUE));

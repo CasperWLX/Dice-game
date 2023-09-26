@@ -92,6 +92,81 @@ public class Game
     }
 
     /**
+     * Skriver ut alla spelares namn
+     *
+     * @param listOfPlayers - lista med spelare
+     */
+    public void printPlayers(ArrayList<Player> listOfPlayers)
+    {
+        for(Player listOfPlayer : listOfPlayers)
+        {
+            System.out.println(listOfPlayer);
+        }
+    }
+
+    /**
+     * Metod som finner spelaren med mest poäng och sparar talet
+     *
+     * @param currentGame   - Objekt med spelmetoder
+     * @param listOfPlayers - Lista med spelare
+     * @param noOfDice      - antal tärningar
+     * @param currentMax    - nuvarande högsta poäng
+     * @return - heltal med högsta poängen
+     */
+    public int findCurrentMax(Game currentGame, ArrayList<Player> listOfPlayers, int noOfDice, int currentMax)
+    {
+        //loopar igenom alla spelare för att spara deras poäng samt högsta poäng
+        for(Player player : listOfPlayers)
+        {
+            currentGame.saveScore(player, noOfDice);
+            if(player.getCurrentScore() > currentMax)
+            {
+                currentMax = player.getCurrentScore();
+            }
+        }
+        return currentMax;
+    }
+
+    /**
+     * Metod som lägger till vinnare i en separat lista
+     *
+     * @param listOfPlayers  - lista med spelare
+     * @param winningPlayers - lista med vinnare
+     * @param currentMax     - nuvarande högsta poäng
+     */
+    public void addWinners(ArrayList<Player> listOfPlayers, ArrayList<Player> winningPlayers, int currentMax)
+    {
+        //Lägger till vinnare i en egen lista
+        for(Player player : listOfPlayers)
+        {
+            if(player.getCurrentScore() == currentMax)
+            {
+                winningPlayers.add(player);
+            }
+        }
+    }
+
+    /**
+     * Metod som skriver ut vinnaren/vinnarna
+     *
+     * @param winningPlayers - lista med vinnare
+     */
+    public void printWinners(ArrayList<Player> winningPlayers)
+    {
+        if(winningPlayers.size() > 1)
+        {
+            for(Player players : winningPlayers)
+            {
+                System.out.printf("The winners are %s with a score of %d\n", players.getName(), players.getCurrentScore());
+            }
+        }
+        else
+        {
+            System.out.printf("The winner is %s with a score of %d\n", winningPlayers.get(0).getName(), winningPlayers.get(0).getCurrentScore());
+        }
+    }
+
+    /**
      * Metod som väntar i 2 sekunder innan den skickar ut något i konsolen
      */
     public void waitTwoSeconds(int noOfDice)

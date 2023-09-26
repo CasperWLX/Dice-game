@@ -67,7 +67,7 @@ public class Input
         {
             return isNumberPositive(number);
         }
-        catch(NumberFormatException e)
+        catch(NumberFormatException nfe)
         {
             System.out.println("Please only enter numbers");
             return 0;

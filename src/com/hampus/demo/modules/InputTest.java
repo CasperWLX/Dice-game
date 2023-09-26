@@ -18,14 +18,26 @@ class InputTest
     @Test
     void isNumberAnInt()
     {
-        int result = input.isInputEmpty("aaabbbccc");
+        int result = input.isNumberAnInt("aaabbbccc");
+        assertEquals(0, result);
+
+        result = input.isNumberAnInt("A1B2C3");
+        assertEquals(0, result);
+
+        result = input.isNumberAnInt("++++++++");
         assertEquals(0, result);
     }
 
     @Test
     void isNumberPositive()
     {
-        int result = input.isInputEmpty("-123");
+        int result = input.isNumberPositive("-123");
+        assertEquals(0,result);
+
+        result = input.isNumberPositive("-1");
+        assertEquals(0,result);
+
+        result = input.isNumberPositive(String.valueOf(Integer.MIN_VALUE));
         assertEquals(0,result);
     }
 

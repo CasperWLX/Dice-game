@@ -62,6 +62,11 @@ public class Player
         return this.currentScore;
     }
 
+    /**
+     * Metod som hämtar spelarnumret
+     *
+     * @param playerNumber - int med spelarens nummer
+     */
     public void setPlayerNumber(int playerNumber)
     {
         this.playerNumber = playerNumber;

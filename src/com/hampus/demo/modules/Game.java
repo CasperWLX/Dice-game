@@ -167,7 +167,7 @@ public class Game
     }
 
     /**
-     * Metod som väntar i 2 sekunder innan den skickar ut något i konsolen
+     * Metod som väntar i x antal sekunder innan den skickar ut något i konsolen
      */
     public void waitTwoSeconds(int noOfDice)
     {

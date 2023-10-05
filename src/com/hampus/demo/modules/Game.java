@@ -65,7 +65,7 @@ public class Game
         System.out.printf("Total score for %s is : %d\n", player.getName(), player.getCurrentScore());
 
         //Saktar ner flödet i konsolen
-        waitTwoSeconds(noOfDice);
+        waitSeconds(noOfDice);
     }
 
     /**
@@ -169,7 +169,7 @@ public class Game
     /**
      * Metod som väntar i x antal sekunder innan den skickar ut något i konsolen
      */
-    public void waitTwoSeconds(int noOfDice)
+    public void waitSeconds(int noOfDice)
     {
         int secondsToWait = 1000 * noOfDice;
         try

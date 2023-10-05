@@ -1,5 +1,6 @@
-package com.hampus.demo.modules;
+package com.hampus.test;
 
+import com.hampus.demo.modules.Input;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,6 +14,8 @@ class InputTest
     {
         int result = input.isInputEmpty("");
         assertEquals(0,result);
+        result = input.isInputEmpty("1");
+        assertEquals(1,result);
     }
 
     @Test

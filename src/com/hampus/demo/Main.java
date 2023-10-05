@@ -46,7 +46,7 @@ public class Main
         currentGame.printPlayers(listOfPlayers);
 
         //Metod som väntar 2 sekunder innan den printar
-        currentGame.waitTwoSeconds(noOfPlayers);
+        currentGame.waitSeconds(noOfPlayers);
 
         //Startar spelet
         do

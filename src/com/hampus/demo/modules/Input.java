@@ -120,7 +120,7 @@ public class Input
      * Metod som kontrollerar om strängen innehåller siffror eller special karaktärer
      *
      * @param userName - sträng med inmatat namn från användaren
-     * @return - " " eller inmatat namn
+     * @return - en tom " " eller inmatat namn
      */
     public String hasSpecialCharacterOrNumber(String userName)
     {

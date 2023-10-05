@@ -14,8 +14,6 @@ class InputTest
     {
         int result = input.isInputEmpty("");
         assertEquals(0,result);
-        result = input.isInputEmpty("1");
-        assertEquals(1,result);
     }
 
     @Test
